@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
+
+/* Navbar */
+
+#logo {
+  border-radius: 50% 50% 50% 50%;
+  height: 100px;
+  width: 100px;
+}
+
+.navbar {
+  height: 100pt;
+  width: 100%;
+  background-color: #5964b8;
+}
+
+/* HOME */
+
+.splashBox {
+  height: 780px;
+  width: 96%;
+  margin: auto;
+  position: relative;
+}
+
+#splashTitle {
+  font-size: 30pt;
+  color: black;
+  text-align: center;
+  margin-top: 50pt;
+  margin-right: 100pt;
+  padding-bottom: 0px;
+  position: relative;
+  z-index: 2;
+}
+
+#splashImg {
+  display: inline;
+  margin: 0 auto;
+  height: auto;
+  height: 650px;
+  width: 80%;
+  position: relative;
+  object-fit: cover;
+  object-position: 50% 80%;
+  position: center;
+}
+
+/* ADMIN HOME */
+
+.adminHome{
+  
+  text-align: center;
+  color: black;
+}
+
+.announcementDisplay {
+  align-items: center;
+}
+
+/* ANNOUNCE HOME */
+
+.announceHome{
+  text-align: center;
+}
+
+/* FOOTER */
+
+.footer{
+  height: 200px;
+  width: 100%;
+  background-color: #2733A0;
+  margin: 0pt;
+}
+
+.copyright{
+  margin: auto;
+  font-size: 12pt;
+  line-height: 200px;
+  color: #f1f1f1;
+  text-align: center;
+}
