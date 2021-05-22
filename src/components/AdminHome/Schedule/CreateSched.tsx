@@ -132,7 +132,7 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
                     <Input
                     required
                     type = "text"
-                    placeholder = "date"
+                    placeholder = "ex: May 18, 2021"
                     name = "date"
                     value = {this.state.date}
                     onChange = {(e) => this.handleChange(e)}
@@ -144,7 +144,7 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
                     <Input
                     required
                     type = "text"
-                    placeholder = "start Time"
+                    placeholder = "Start Time"
                     name = "startTime"
                     value = {this.state.startTime}
                     onChange = {(e) => this.handleChange(e)}

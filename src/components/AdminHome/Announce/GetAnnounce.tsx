@@ -1,6 +1,6 @@
 import React from "react";
 import UserContext from "../../UserContext/userContext";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import DeleteAnnouncement from "./DeleteAnnounce";
 
 import {
   Container,
@@ -17,34 +17,16 @@ import {
   Fade,
 } from "@material-ui/core";
 
-const marks = [
-  {
-    value: 1,
-    label: "1",
-  },
-  {
-    value: 2,
-    label: "2",
-  },
-  {
-    value: 3,
-    label: "3",
-  },
-  {
-    value: 4,
-    label: "4",
-  },
-  {
-    value: 5,
-    label: "5",
-  },
-];
 
-export interface AnnouncementGetState {
+interface Announcement {
   title: string;
   date: string;
   description: string;
   response: boolean;
+}
+
+export interface AnnouncementGetState {
+  data: Announcement[];
   token: string | null;
   openModal: boolean;
   openAnnouncement: boolean;
@@ -61,10 +43,7 @@ class AnnouncementDisplay extends React.Component<
   constructor(props: AnnouncementGetProps) {
     super(props);
     this.state = {
-      title: "",
-      date: "",
-      description: "",
-      response: false,
+      data: [],
       token: "",
       openModal: false,
       openAnnouncement: false,
@@ -78,10 +57,7 @@ class AnnouncementDisplay extends React.Component<
   }
 
   handleOpenAnnouncement(e: React.BaseSyntheticEvent) {
-    this.setState({
-      openAnnouncement: true,
-    });
-    console.log(this.state.title, this.state.date, this.state.description);
+    
 
     fetch("http://localhost:3000/announcement/", {
       method: "GET",
@@ -102,10 +78,8 @@ class AnnouncementDisplay extends React.Component<
       .then((data) => {
         console.log("announcement", data);
         this.setState({
-          title: this.state.title,
-          date: this.state.date,
-          description: this.state.description,
-          response: this.state.response,
+          data: data,
+          openAnnouncement: true,
         });
       });
   }
@@ -145,14 +119,37 @@ class AnnouncementDisplay extends React.Component<
     }));
   }
 
-  componentDidMount() {
-    this.setState({
-      title: "",
-      date: "",
-      description: "",
-      response: false,
-    });
+  // componentDidMount() {
+  //   this.setState({
+  //     title: "",
+  //     date: "",
+  //     description: "",
+  //     response: false,
+  //   });
+  // }
+
+  componentDidUpdate(){
+    setTimeout(()=> {
+      console.log(this.state.data)}, 2000,
+    )
   }
+
+  deleteAnnouncement = () => {
+    fetch("http://localhost:3000/announcement/delete/:id", {
+        method: "DELETE",
+        headers: ({
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${this.context.token}`,
+        }),
+        // body: JSON.stringify({
+        //       title: this.state.title,
+        //       date: this.state.date,
+        //       description: this.state.description,
+        //       response: this.state.response,
+        // })
+    })
+    console.log("after delete fetch")
+}
 
   render() {
     return (
@@ -164,10 +161,8 @@ class AnnouncementDisplay extends React.Component<
                 <CardActionArea>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h4">
-                      {this.state.title}
-                      {this.state.date}
-                      {this.state.description}
-                       I'd love for the announcement to populate here!
+                      
+                       Announcements
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -181,26 +176,6 @@ class AnnouncementDisplay extends React.Component<
                     View Announcement
                   </Button>
                 </CardActions>
-
-                <CardActions>
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    onClick={(e) => this.handleOpenModal(e)}
-                    color="primary"
-                  >
-                    Edit 
-                  </Button>
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    onClick={(e) => this.handleOpenAnnouncement(e)}
-                    color="primary"
-                  >
-                    Delete
-                  </Button>
-
-                </CardActions>
               </Card>
             </Paper>
             <Modal
@@ -212,24 +187,59 @@ class AnnouncementDisplay extends React.Component<
                   <Paper>
                     <form>
                       <Paper>
-                        <TextareaAutosize
-                          value={this.state.description}
-                          placeholder="is anyone there?"
-                          name="comment"
-                          style = {{width: "300x" , height: "150px"}}
-                          onChange={(e) => this.handleChange(e)}
-                        />
+                        <>
+                        <Card>
+                          <CardActionArea>
+                            <CardContent>
+                              <Typography>
+                                {this.state.data.map((announcement, index) => {
+                                  return (
+                                    <>
+                                    
+                                    <Card className="announcementCreate"
+                                    variant="outlined"
+                                    color="black">
+                                      <CardActionArea>
+                                      <CardContent>
+                                    <Typography component="h1"key={index}>{announcement.title}</Typography>
+                                    <Typography component="h4" key={index}>{announcement.date}</Typography>
+                                    <Typography className="announcementText" color="textSecondary" key={index}>{announcement.description}</Typography>
+                                    <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    >Edit</Button>
+                                    <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick = {this.deleteAnnouncement}
+                                    >Delete</Button>
+                                    </CardContent>
+                                    </CardActionArea>
+                                    </Card>
+                                    
+                                    
+                                    <br/>
+                                    </>
+                                    
+                                  )
+                                })}
+                                
+                              </Typography>
+                            </CardContent>
+                          </CardActionArea>
+                        </Card>
+                        </>
                       </Paper>
-                      <Paper></Paper>
                       <Paper>
-                        <Button
-                        
+                        {/* <Button
                           type="submit"
                           variant="contained"
                           color="primary"
                         >
                           Submit Announcement
-                        </Button>
+                        </Button> */}
                       </Paper>
                     </form>
                   </Paper>
@@ -254,9 +264,6 @@ class AnnouncementDisplay extends React.Component<
               </Fade>
             </Modal>
           </Grid>
-        {/* ) : ( */}
-          <p>This is supposed to be the fetch for get all announcements</p>
-        {/* ) */}
       </div>
     );
   }

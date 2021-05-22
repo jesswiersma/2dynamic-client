@@ -1,6 +1,5 @@
 import React from 'react';
 import AnnouncementCreate from "./Announce/CreateAnnounce";
-import DisplayAnnounce from './Announce/DisplayAnnounce';
 import AnnouncementDisplay from './Announce/GetAnnounce';
 import ScheduleCreate from "./Schedule/CreateSched";
 import ScheduleDisplay from "./Schedule/GetSched";

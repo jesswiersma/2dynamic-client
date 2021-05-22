@@ -58,6 +58,12 @@
   align-items: center;
 }
 
+.SchedDisplay {
+  flex-grow: 1;
+  overflow: auto;
+  min-height: 100%;
+}
+
 /* ANNOUNCE HOME */
 
 .announceHome{

@@ -1,6 +1,5 @@
 import React from "react";
 import UserContext from "../../UserContext/userContext";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
 import {
   Container,
@@ -11,36 +10,14 @@ import {
   CardActions,
   CardContent,
   Button,
+  List,
   Typography,
   Modal,
   Backdrop,
   Fade,
 } from "@material-ui/core";
 
-const marks = [
-  {
-    value: 1,
-    label: "1",
-  },
-  {
-    value: 2,
-    label: "2",
-  },
-  {
-    value: 3,
-    label: "3",
-  },
-  {
-    value: 4,
-    label: "4",
-  },
-  {
-    value: 5,
-    label: "5",
-  },
-];
-
-export interface ScheduleGetState {
+interface Schedule {
   day: string;
   date: string;
   startTime: string;
@@ -54,6 +31,15 @@ export interface ScheduleGetState {
   isSet: boolean;
 }
 
+export interface ScheduleGetState {
+  data: Schedule[];
+  token: string | null;
+  openModal: boolean;
+  openSchedule: boolean;
+  isSet: boolean;
+  
+}
+
 export interface ScheduleGetProps {}
 
 class ScheduleDisplay extends React.Component<
@@ -64,14 +50,8 @@ class ScheduleDisplay extends React.Component<
   constructor(props: ScheduleGetProps) {
     super(props);
     this.state = {
-        day: "",
-        date: "",
-        startTime: "",
-        endTime: "",
-        type: "",
-        location: "",
-        description: "",
-        token: "",
+       data: [],
+       token: "",
         openModal: false,
         openSchedule: false,
         isSet: false,
@@ -84,10 +64,6 @@ class ScheduleDisplay extends React.Component<
   }
 
   handleOpenAnnouncement(e: React.BaseSyntheticEvent) {
-    this.setState({
-      openSchedule: true,
-    });
-    console.log(this.state.day, this.state.date, this.state.description);
 
     fetch("http://localhost:3000/schedule/", {
       method: "GET",
@@ -98,7 +74,7 @@ class ScheduleDisplay extends React.Component<
     })
       .then((res) => {
         console.log(res);
-
+        
         if (res.status !== 200) {
           console.log("Schedule not displayed", res.status);
         } else {
@@ -108,16 +84,14 @@ class ScheduleDisplay extends React.Component<
       .then((data) => {
         console.log("Schedule", data);
         this.setState({
-          day: this.state.day,
-          date: this.state.date,
-          startTime: this.state.startTime,
-          endTime: this.state.endTime,
-          type: this.state.type,
-          location: this.state.location,
-          description: this.state.description,    
+          data: data,
+          openSchedule: true,    
         });
+        
+         
       });
   }
+   
 
   stateSetter = () => {
     return this.setState({ isSet: true });
@@ -153,37 +127,25 @@ class ScheduleDisplay extends React.Component<
       >,
     }));
   }
-
-  componentDidMount() {
-    this.setState({
-      day: "",
-      date: "",
-      startTime: "",
-      endTime: "",
-      type: "",
-      location: "",
-      description: "",
-    });
+  
+  componentDidUpdate(){
+    setTimeout(()=>{
+      console.log(this.state.data[0].date)}, 3000,
+      )
+      console.log(this.state.data)
   }
+
 
   render() {
     return (
       <div className = "scheduleDisplay">
-        {/* {this.state.isSet ? ( */}
-          <Grid item xs={12} sm={4} md={3} lg={2}>
-            <Paper elevation={20} variant="outlined">
+          <Grid className="SchedDisplay" item xs={12} sm={4} md={3} lg={2}>
+            <Paper elevation={20} variant="outlined" style={{maxHeight:200, overflow: "auto"}}>
               <Card >
                 <CardActionArea>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h4">
-                      {this.state.day}
-                      {this.state.date}
-                      {this.state.startTime}
-                      {this.state.endTime}
-                      {this.state.type}
-                      {this.state.location}
-                      {this.state.description}
-                       I'd love for the schedule to populate here!
+                       Schedule
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -197,58 +159,59 @@ class ScheduleDisplay extends React.Component<
                     View Schedule
                   </Button>
                 </CardActions>
-
-                <CardActions>
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    onClick={(e) => this.handleOpenModal(e)}
-                    color="primary"
-                  >
-                    Edit 
-                  </Button>
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    onClick={(e) => this.handleOpenAnnouncement(e)}
-                    color="primary"
-                  >
-                    Delete
-                  </Button>
-
-                </CardActions>
               </Card>
             </Paper>
+           
             <Modal
               open={this.state.openSchedule}
               onClose={this.handleClose}
             >
+             
               <Fade in={this.state.openSchedule}>
                 <Container maxWidth="md">
-                  <Paper>
                     <form>
-                      <Paper>
-                        <TextareaAutosize
-                          value={this.state.description}
-                          placeholder="is anyone there?"
-                          name="comment"
-                          style = {{width: "300x" , height: "150px"}}
-                          onChange={(e) => this.handleChange(e)}
-                        />
-                      </Paper>
-                      <Paper></Paper>
-                      <Paper>
-                        <Button
+                      <Paper style={{maxHeight: 500, overflow: "auto"}}>
+                      <List style={{maxHeight:"100%", overflow: "auto"}}>
                         
-                          type="submit"
-                          variant="contained"
-                          color="primary"
-                        >
-                          Submit Schedule
-                        </Button>
-                      </Paper>
+                        {this.state.data.map((schedule, index) => {
+                          return(
+                            <>
+                            <Card className="getSched"
+                            variant="outlined"
+                            color="black">
+                              <CardActionArea>
+                                <CardContent>
+                                  <Paper style={{maxHeight: 100, overflow: "auto"}}>
+                                    <List style={{maxHeight:"100%", overflow: "auto"}}>
+                            <Typography component="h1" key={index}>Date: {schedule.date}</Typography>
+                            <Typography component="h1" key={index}>Day: {schedule.day}</Typography>
+                            <Typography component="h3" key={index}>Start Time: {schedule.startTime}</Typography>
+                            <Typography component="h3" key={index}>End Time: {schedule.endTime}</Typography> 
+                            <Typography component="h3" color="textSecondary" key={index}>Type: {schedule.type}</Typography>
+                            <Typography component="h3" color="textSecondary" key={index}>Location: {schedule.location}</Typography>
+                            <Typography component="h3" color="textSecondary"key={index}>Description:{schedule.description}</Typography>
+                            <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            >Edit</Button>
+                            <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            >Delete</Button>
+                            </List>
+                            </Paper>
+                            </CardContent>
+                            </CardActionArea>
+                            </Card>
+                            <br/>
+                            </>
+                          )
+                        })}
+                        </List>
+                        </Paper>                     
                     </form>
-                  </Paper>
                 </Container>
               </Fade>
             </Modal>
@@ -265,14 +228,11 @@ class ScheduleDisplay extends React.Component<
             >
               <Fade in={this.state.openModal}>
                 <Container>
-                  <Paper></Paper>
+                  
                 </Container>
               </Fade>
             </Modal>
           </Grid>
-        {/* ) : ( */}
-          <p>This is a working fetch for schedule but can't get display</p>
-        {/* ) */}
       </div>
     );
   }

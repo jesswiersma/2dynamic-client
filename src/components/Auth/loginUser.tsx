@@ -2,7 +2,7 @@ import React, {
     BaseSyntheticEvent,
     Component,
 } from "react";
-import {Redirect} from "react-router";
+import {Route, Redirect} from "react-router";
 import UserContext from "../UserContext/userContext";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
@@ -105,10 +105,14 @@ class LoginUser extends Component <LoginUserProps, LoginUserState> {
                     label="password"
                     type="text"
                     name="password"
+                    inputProps={{
+                        min: 5, 
+                        maxLength: 25}} 
                     InputLabelProps={{
                       shrink: true,
                     }}
                     variant="outlined"
+                    //errorText= "Please enter a password between 5 and 25 characters"
                     onChange={(e) => this.handleChange(e)}
                   />
                 </FormControl>
@@ -116,7 +120,9 @@ class LoginUser extends Component <LoginUserProps, LoginUserState> {
                 <Button variant="outlined" color="primary" type="submit">
                       Login
                     </Button>
-                    {!this.context.isAdmin ? <Redirect to="/user" /> : <Redirect to = "/waterloo"/>}
+                  
+                    {this.context.isAdmin ? <Redirect to="/waterloo" /> : <Redirect to = "/user"/>}
+                    
                 </FormControl>
                 </form>
                 <Button onClick={this.logout} variant="outlined" color="primary" type="submit">

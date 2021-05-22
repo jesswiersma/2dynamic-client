@@ -132,6 +132,7 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
                       label="Password"
                       type="password"
                       name="password"
+                      inputProps={{minLength: 5, maxLength: 25}} 
                       InputLabelProps={{
                         shrink: true,
                       }}
