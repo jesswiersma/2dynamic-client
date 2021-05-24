@@ -69,7 +69,7 @@ class ScheduleDisplay extends React.Component<
 
   handleOpenAnnouncement(e: React.BaseSyntheticEvent) {
 
-    fetch(`${APIURL}/schedule/`, {
+    fetch(`${process.env.REACT_APP_SERVER}/schedule/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -99,7 +99,7 @@ class ScheduleDisplay extends React.Component<
     if (e) {e.preventDefault()}
     console.log("inside delete fetch")
 
-    fetch(`${APIURL}/waterloo/schedule/delete/${id}`, {
+    fetch(`${process.env.REACT_APP_SERVER}/waterloo/schedule/delete/${id}`, {
         method: "DELETE",
         headers: new Headers({
             "Content-Type": "application/json",

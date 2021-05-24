@@ -40,23 +40,23 @@ class LoginUser extends Component<LoginUserProps, LoginUserState> {
     };
   }
 
-  handleOpenModal(e: React.BaseSyntheticEvent) {
-    this.setState({
-      openModal: true,
-    });
-  }
+  // handleOpenModal(e: React.BaseSyntheticEvent) {
+  //   this.setState({
+  //     openModal: true,
+  //   });
+  // }
 
-  handleClose = () => {
-    this.setState({
-      openModal: false,
-      handleSubmit: false,
-    });
-  };
+  // handleClose = () => {
+  //   this.setState({
+  //     openModal: false,
+  //     handleSubmit: false,
+  //   });
+  // };
 
   loginUser(e: BaseSyntheticEvent) {
     console.log("handlesubmit");
     e.preventDefault();
-    fetch(`${APIURL}/user/login`, {
+    fetch(`${process.env.REACT_APP_SERVER}/user/login`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",

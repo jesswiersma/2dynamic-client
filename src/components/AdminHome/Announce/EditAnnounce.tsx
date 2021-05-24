@@ -76,7 +76,7 @@ class AnnouncementEdit extends Component <AnnouncementEditProps, AnnouncementEdi
      //if (e) {e.preventDefault()}
      console.log("inside get by id fetch")
 
-     fetch(`${APIURL}/announcement/${id}`, {
+     fetch(`${process.env.REACT_APP_SERVER}/announcement/${id}`, {
        method: "GET",
        headers: {
          "Content-Type": "Application/json",
@@ -106,7 +106,7 @@ class AnnouncementEdit extends Component <AnnouncementEditProps, AnnouncementEdi
         if (e) {e.preventDefault()}
         console.log("inside edit fetch")
 
-        fetch(`${APIURL}/waterloo/announcement/update/${id}`, {
+        fetch(`${process.env.REACT_APP_SERVER}/waterloo/announcement/update/${id}`, {
             method: "PUT",
             headers: new Headers ({
                 "Content-type": "Application/json",
@@ -172,10 +172,10 @@ class AnnouncementEdit extends Component <AnnouncementEditProps, AnnouncementEdi
     }
 
 
-    // componentDidMount() {
-    //   console.log(this.props.id);
-    //  //this.getAnnouncement(this.props.id);
-    // }
+    componentDidMount() {
+      console.log(this.props.id);
+     //this.getAnnouncement(this.props.id);
+    }
 
 
     componentDidUpdate(){

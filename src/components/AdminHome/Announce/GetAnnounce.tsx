@@ -63,7 +63,7 @@ class AnnouncementDisplay extends React.Component<
 
   handleOpenAnnouncement(e: React.BaseSyntheticEvent) {
     
-    fetch(`${APIURL}/announcement/`, {
+    fetch(`${process.env.REACT_APP_SERVER}/announcement/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -94,7 +94,7 @@ class AnnouncementDisplay extends React.Component<
     if (e) {e.preventDefault()};
     console.log("inside edit fetch")
 
-    fetch(`${APIURL}/waterloo/announcement/update/${id}`, {
+    fetch(`${process.env.REACT_APP_SERVER}/waterloo/announcement/update/${id}`, {
       method: "PUT",
       headers: new Headers ({
         "Content-Type": "application/json",
@@ -124,7 +124,7 @@ class AnnouncementDisplay extends React.Component<
     if (e) {e.preventDefault()}
     console.log("inside delete fetch")
 
-    fetch(`${APIURL}/waterloo/announcement/delete/${id}`, {
+    fetch(`${process.env.REACT_APP_SERVER}/waterloo/announcement/delete/${id}`, {
         method: "DELETE",
         headers: new Headers({
             "Content-Type": "application/json",

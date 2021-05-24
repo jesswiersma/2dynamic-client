@@ -30,7 +30,7 @@ class AnnouncementCreate extends Component <AnnouncementCreateProps, Announcemen
     handleSubmit(e: BaseSyntheticEvent) {
         e.preventDefault();
         console.log("Fetch in announcement Create")
-        fetch(`${APIURL}/waterloo/announcement`, {
+        fetch(`${process.env.REACT_APP_SERVER}/waterloo/announcement`, {
             method: "POST",
             headers: new Headers ({
                 "Content-Type": "application/json",

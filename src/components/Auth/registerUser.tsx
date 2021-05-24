@@ -36,7 +36,7 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
         e.preventDefault();
         console.log(this.state)
         console.log("line before fetch")
-        fetch(`${APIURL}/user/register`, {
+        fetch(`${process.env.REACT_APP_SERVER}/user/register`, {
             method: "POST",
             headers: new Headers ({
                 "Content-Type": "application/json",

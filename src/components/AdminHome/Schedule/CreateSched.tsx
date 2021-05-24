@@ -56,7 +56,7 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
     handleSubmit(e: BaseSyntheticEvent) {
         e.preventDefault();
         console.log("Fetch in schcedule Create")
-        fetch(`${APIURL}/waterloo/schedule`, {
+        fetch(`${process.env.REACT_APP_SERVER}/waterloo/schedule`, {
             method: "POST",
             headers: new Headers ({
                 "Content-Type": "application/json",
