@@ -34,6 +34,7 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
     handleSubmit(e: BaseSyntheticEvent) {
 
         e.preventDefault();
+        console.log(this.state)
         console.log("line before fetch")
         fetch(`${APIURL}/user/register`, {
             method: "POST",
