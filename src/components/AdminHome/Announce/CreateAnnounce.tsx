@@ -109,7 +109,7 @@ class AnnouncementCreate extends Component <AnnouncementCreateProps, Announcemen
                 <FormGroup>
                     <Label htmlFor = "description"></Label>
                     <Input
-                    style = {{width: "300x" , height: "150px"}}
+                    style = {{width: "400px" , height: "150px"}}
                     type = "text"
                     placeholder = "Announcement Description"
                     name = "description"

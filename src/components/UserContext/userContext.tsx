@@ -42,7 +42,7 @@ export class UserContextProvider extends Component<
             if (this.state.token) {
                 localStorage.setItem("token", this.state.token);
                 
-                fetch(`http://localhost:3000/user/`, {
+                fetch(`${process.env.REACT_APP_SERVER}/user/`, {
                     headers: new Headers ({
                         Authorization: `Bearer ${this.state.token}`}),
                     })

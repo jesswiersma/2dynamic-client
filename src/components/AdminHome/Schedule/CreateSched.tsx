@@ -192,7 +192,7 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
                     <Label htmlFor = "description"></Label>
                     <Input
                     required
-                    style = {{width: "300x" , height: "150px"}}
+                    style = {{width: "400px" , height: "150px"}}
                     type = "text"
                     placeholder = "Schedule description"
                     name = "description"

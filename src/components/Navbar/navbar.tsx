@@ -62,11 +62,12 @@ class NavBar extends React.Component<any, IMenuState> {
         >
           Logout
         </Button>
-        <MenuItem>
+
+         {/* <MenuItem>
           <Link to="/login"></Link>
           <LoginUser setToken={this.props.setToken} />
-          {/* <RegisterUser setToken = {this.props.setToken}/>  */}
-        </MenuItem>
+          <RegisterUser setToken = {this.props.setToken}/>  
+        </MenuItem>  */}
 
         <Container fixed disableGutters id="NavBar">
           <Paper elevation={10}>
@@ -100,8 +101,6 @@ class NavBar extends React.Component<any, IMenuState> {
                 <MenuItem>
                 <Link to="/user">User Home</Link>
                 </MenuItem>
-
-               
 
                 <MenuItem>
                   <Link to="/waterloo">Admin Home</Link>

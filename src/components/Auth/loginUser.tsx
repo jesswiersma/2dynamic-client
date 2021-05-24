@@ -4,16 +4,16 @@ import UserContext from "../UserContext/userContext";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import APIURL from "../../helpers/environment";
-import {
-  Modal,
-  Container,
-  Fade,
-  Paper,
-  Backdrop,
-  Grid,
-  Card,
-} from "@material-ui/core";
+// import APIURL from "../../helpers/environment";
+// import {
+//   Modal,
+//   Container,
+//   Fade,
+//   Paper,
+//   Backdrop,
+//   Grid,
+//   Card,
+// } from "@material-ui/core";
 
 export interface LoginUserState {
   email: string;
@@ -54,7 +54,7 @@ class LoginUser extends Component<LoginUserProps, LoginUserState> {
   // };
 
   loginUser(e: BaseSyntheticEvent) {
-    console.log("handlesubmit");
+    console.log("loginUser");
     e.preventDefault();
     fetch(`${process.env.REACT_APP_SERVER}/user/login`, {
       method: "POST",
@@ -75,7 +75,6 @@ class LoginUser extends Component<LoginUserProps, LoginUserState> {
           console.log("test");
           alert("Successfully logged in!");
         }
-
         return res.json();
       })
       .then((data) => {
@@ -94,7 +93,7 @@ class LoginUser extends Component<LoginUserProps, LoginUserState> {
     }));
   }
 
-  // Not Working
+  //Working
   logout = () => {
     window.localStorage.clear();
   };
@@ -117,6 +116,7 @@ class LoginUser extends Component<LoginUserProps, LoginUserState> {
             onChange={(e) => this.handleChange(e)}
           />
         </FormControl>
+
         <FormControl>
           <TextField
             required
@@ -134,12 +134,13 @@ class LoginUser extends Component<LoginUserProps, LoginUserState> {
             onChange={(e) => this.handleChange(e)}
           />
         </FormControl>
+
         <FormControl>
         <Button variant="outlined" color="primary" type="submit">
               Login 
             </Button> 
           
-            {this.context.isAdmin ? <Redirect to="/waterloo" /> : <Redirect to = "/user"/>}
+            {this.context.isAuth ? <Redirect to="/waterloo" /> : <Redirect to = "/user" />}
             
         </FormControl>
         </form>

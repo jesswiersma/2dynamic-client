@@ -3,7 +3,8 @@ import React, { Component, BaseSyntheticEvent} from "react";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import APIURL from "../../helpers/environment";
+import {Redirect} from "react-router-dom";
+//import APIURL from "../../helpers/environment";
 
 export interface RegisterUserState {
     firstName: string;
@@ -89,6 +90,7 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
         render() {
             return (
               <div>
+                <>
                 <form onSubmit={(e) => this.handleSubmit(e)}>
                   <FormControl>
                     <TextField
@@ -162,6 +164,8 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
                     </Button>
                   </FormControl>
                 </form>
+                </>
+                {this.context.isAuth ? <Redirect to="/" /> : null}
               </div>
             );
           }

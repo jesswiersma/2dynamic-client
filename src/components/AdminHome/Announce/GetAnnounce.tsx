@@ -62,7 +62,7 @@ class AnnouncementDisplay extends React.Component<
 /////////// GET ALL ////////////////
 
   handleOpenAnnouncement(e: React.BaseSyntheticEvent) {
-    
+      
     fetch(`${process.env.REACT_APP_SERVER}/announcement/`, {
       method: "GET",
       headers: {
