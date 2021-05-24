@@ -6,6 +6,7 @@ import Footer from "./components/Footer/footer";
 import Home from "./components/Home/home";
 import AdminHome from "./components/AdminHome/AdminHome";
 import HomeAnnounce from "./components/AnnounceHome/HomeAnnounce";
+import UserHome from "./components/UserHome/UserHome";
 
 import {
   BrowserRouter as Router,
@@ -23,33 +24,36 @@ const App: React.FunctionComponent = () => {
         <UserContextProvider>
         <Navbar />
         <Switch>
-          <Route path = "/user">
-            {/* <UserHome/> */}
+
+          <Route exact path = "/user">
+              <UserHome/>  
           </Route>
-          <Route path = "/waterloo">
+
+          <Route exact path = "/waterloo">
              <AdminHome/> 
           </Route>
+
           <Route path = "/user/register">
-          
           </Route>
+
           <Route path = "/schedule">
-            <HomeSched/>
-          
+            <HomeSched/> 
           </Route>
+
           <Route path = "/announcement">
             <HomeAnnounce/>
-          
           </Route>
 
 
           <Route path = "/">
             <Home/>
           </Route>
+          
         </Switch>
-        
+        </UserContextProvider>
           
         <Footer/>
-      </UserContextProvider>
+      
       </div>
     </div>
     </Router>

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { BaseSyntheticEvent } from "react";
 import UserContext from "../../UserContext/userContext";
-import DeleteAnnouncement from "./DeleteAnnounce";
+import AnnouncementEdit from "./EditAnnounce";
 
 import {
   Container,
@@ -17,12 +17,12 @@ import {
   Fade,
 } from "@material-ui/core";
 
-
 interface Announcement {
   title: string;
   date: string;
   description: string;
   response: boolean;
+  id: number;
 }
 
 export interface AnnouncementGetState {
@@ -30,7 +30,7 @@ export interface AnnouncementGetState {
   token: string | null;
   openModal: boolean;
   openAnnouncement: boolean;
-  isSet: boolean;
+  isSet: boolean;  
 }
 
 export interface AnnouncementGetProps {}
@@ -50,20 +50,23 @@ class AnnouncementDisplay extends React.Component<
       isSet: false,
     };
   }
+
+
   handleOpenModal(e: React.BaseSyntheticEvent) {
     this.setState({
       openModal: true,
     });
   }
 
+/////////// GET ALL ////////////////
+
   handleOpenAnnouncement(e: React.BaseSyntheticEvent) {
     
-
     fetch("http://localhost:3000/announcement/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.context.token}`,
+        "Authorization": `Bearer ${this.context.token}`,
       },
     })
       .then((res) => {
@@ -84,13 +87,70 @@ class AnnouncementDisplay extends React.Component<
       });
   }
 
+///////////// EDIT - get a 200 response but how do I put in a modal to actually edit??/////////////////////
+
+  editAnnouncement = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+    if (e) {e.preventDefault()};
+    console.log("inside edit fetch")
+
+    fetch(`http://localhost:3000/waterloo/announcement/update/${id}`, {
+      method: "PUT",
+      headers: new Headers ({
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${this.context.token}`,
+      }),
+
+      body: JSON.stringify({
+        data: this.state.data,
+      })
+    },
+    )
+    .then((res) => {
+      if (res.status !== 200) {
+        console.log(res)
+        alert("Unable to edit announcement"); 
+      } else {
+        alert ("Announcement successfully edited!");
+      }
+      return res.json()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+    })
+  }
+
+  ///////////// DELETE //////////////
+  deleteAnnouncement = (e:React.MouseEvent<HTMLButtonElement>, id: number) => {
+    if (e) {e.preventDefault()}
+    console.log("inside delete fetch")
+
+    fetch(`http://localhost:3000/waterloo/announcement/delete/${id}`, {
+        method: "DELETE",
+        headers: new Headers({
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${this.context.token}`,
+        }),  
+    })
+    .then((res) => {
+      if(res.status !== 200) {
+        console.log(res)
+        console.log("now you're here")
+        alert ("Unable to delete announcement");
+      } else {
+        alert ("Announcement successfully deleted!");
+      }
+      return res.json()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+    });
+    };
+
   stateSetter = () => {
     return this.setState({ isSet: true });
   };
 
-  //   componentDidUpdate () {
-  //       this.stateSetter()
-  //   }
+    // componentDidUpdate () {
+    //     this.stateSetter()
+    // }
 
   handleClose = () => {
     this.setState({
@@ -119,37 +179,15 @@ class AnnouncementDisplay extends React.Component<
     }));
   }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     title: "",
-  //     date: "",
-  //     description: "",
-  //     response: false,
-  //   });
+  // componentDidMount=()=> {
+  //   this.handleOpenAnnouncement(e)
   // }
 
   componentDidUpdate(){
     setTimeout(()=> {
-      console.log(this.state.data)}, 2000,
+      console.log(this.state.data)}, 1000,
     )
   }
-
-  deleteAnnouncement = () => {
-    fetch("http://localhost:3000/announcement/delete/:id", {
-        method: "DELETE",
-        headers: ({
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${this.context.token}`,
-        }),
-        // body: JSON.stringify({
-        //       title: this.state.title,
-        //       date: this.state.date,
-        //       description: this.state.description,
-        //       response: this.state.response,
-        // })
-    })
-    console.log("after delete fetch")
-}
 
   render() {
     return (
@@ -186,7 +224,7 @@ class AnnouncementDisplay extends React.Component<
                 <Container maxWidth="md">
                   <Paper>
                     <form>
-                      <Paper>
+                      <Paper style ={{maxHeight: 500, overflow: "auto"}}>
                         <>
                         <Card>
                           <CardActionArea>
@@ -195,7 +233,8 @@ class AnnouncementDisplay extends React.Component<
                                 {this.state.data.map((announcement, index) => {
                                   return (
                                     <>
-                                    
+                                    <Paper>
+                                      <form>
                                     <Card className="announcementCreate"
                                     variant="outlined"
                                     color="black">
@@ -204,22 +243,21 @@ class AnnouncementDisplay extends React.Component<
                                     <Typography component="h1"key={index}>{announcement.title}</Typography>
                                     <Typography component="h4" key={index}>{announcement.date}</Typography>
                                     <Typography className="announcementText" color="textSecondary" key={index}>{announcement.description}</Typography>
-                                    <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    >Edit</Button>
-                                    <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    onClick = {this.deleteAnnouncement}
-                                    >Delete</Button>
                                     </CardContent>
                                     </CardActionArea>
                                     </Card>
-                                    
-                                    
+                                    </form>
+                                    {/* <Button
+                                    onClick = {(e) => {this.editAnnouncement(e, announcement.id)}}>Edit</Button> */}
+                                   
+                                    <AnnouncementEdit id={announcement.id}/> 
+                                    <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick = {(e) => {this.deleteAnnouncement(e, announcement.id)}}
+                                    >Delete</Button>
+                                    </Paper> 
                                     <br/>
                                     </>
                                     
@@ -231,15 +269,6 @@ class AnnouncementDisplay extends React.Component<
                           </CardActionArea>
                         </Card>
                         </>
-                      </Paper>
-                      <Paper>
-                        {/* <Button
-                          type="submit"
-                          variant="contained"
-                          color="primary"
-                        >
-                          Submit Announcement
-                        </Button> */}
                       </Paper>
                     </form>
                   </Paper>

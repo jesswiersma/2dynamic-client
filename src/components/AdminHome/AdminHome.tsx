@@ -8,11 +8,13 @@ const AdminHome: React.FunctionComponent = () => {
     return(
         <div className = "adminHome">
             <h2>Admin Home</h2>
-            <p>Is this working</p>
+            <p>Fill out the following form to create an Announcement</p>
               <AnnouncementCreate/>  {/*Working POST - ugly form */}
               <AnnouncementDisplay/> {/* I would like to be able to view, edit and delete from this card */}
+            <p>Fill out the following from to create the Schedule
              <ScheduleCreate/>
              <ScheduleDisplay/>
+             </p>
               
         </div>
     )

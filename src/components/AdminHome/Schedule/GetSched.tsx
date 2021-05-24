@@ -29,6 +29,7 @@ interface Schedule {
   openModal: boolean;
   openSchedule: boolean;
   isSet: boolean;
+  id: number;
 }
 
 export interface ScheduleGetState {
@@ -63,6 +64,8 @@ class ScheduleDisplay extends React.Component<
     });
   }
 
+///////////// GET ALL /////////////////
+
   handleOpenAnnouncement(e: React.BaseSyntheticEvent) {
 
     fetch("http://localhost:3000/schedule/", {
@@ -86,16 +89,42 @@ class ScheduleDisplay extends React.Component<
         this.setState({
           data: data,
           openSchedule: true,    
-        });
-        
-         
+        });  
       });
   }
-   
+
+  ///////////// DELETE //////////////
+  deleteSchedule = (e:React.MouseEvent<HTMLButtonElement>, id: number) => {
+    if (e) {e.preventDefault()}
+    console.log("inside delete fetch")
+
+    fetch(`http://localhost:3000/waterloo/schedule/delete/${id}`, {
+        method: "DELETE",
+        headers: new Headers({
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${this.context.token}`,
+        }),  
+    })
+    .then((res) => {
+      if(res.status !== 200) {
+        console.log(res)
+        console.log("now you're here")
+        alert ("Unable to delete schedule");
+      } else {
+        alert ("Schedule successfully deleted!");
+      }
+      return res.json()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+    });
+    };
+
+  //////////////////////////////////////////////// 
 
   stateSetter = () => {
     return this.setState({ isSet: true });
   };
+   
 
   //   componentDidUpdate () {
   //       this.stateSetter()
@@ -128,19 +157,19 @@ class ScheduleDisplay extends React.Component<
     }));
   }
   
-  componentDidUpdate(){
-    setTimeout(()=>{
-      console.log(this.state.data[0].date)}, 3000,
-      )
-      console.log(this.state.data)
-  }
+  // componentDidUpdate(){
+  //   setTimeout(()=>{
+  //     console.log(this.state.data[0].date)}, 3000,
+  //     )
+  //     console.log(this.state.data)
+  // }
 
 
   render() {
     return (
       <div className = "scheduleDisplay">
           <Grid className="SchedDisplay" item xs={12} sm={4} md={3} lg={2}>
-            <Paper elevation={20} variant="outlined" style={{maxHeight:200, overflow: "auto"}}>
+            <Paper elevation={20} variant="outlined" >
               <Card >
                 <CardActionArea>
                   <CardContent>
@@ -166,52 +195,66 @@ class ScheduleDisplay extends React.Component<
               open={this.state.openSchedule}
               onClose={this.handleClose}
             >
-             
               <Fade in={this.state.openSchedule}>
                 <Container maxWidth="md">
+                  <Paper>
                     <form>
-                      <Paper style={{maxHeight: 500, overflow: "auto"}}>
-                      <List style={{maxHeight:"100%", overflow: "auto"}}>
-                        
-                        {this.state.data.map((schedule, index) => {
-                          return(
-                            <>
-                            <Card className="getSched"
-                            variant="outlined"
-                            color="black">
-                              <CardActionArea>
-                                <CardContent>
-                                  <Paper style={{maxHeight: 100, overflow: "auto"}}>
-                                    <List style={{maxHeight:"100%", overflow: "auto"}}>
-                            <Typography component="h1" key={index}>Date: {schedule.date}</Typography>
-                            <Typography component="h1" key={index}>Day: {schedule.day}</Typography>
-                            <Typography component="h3" key={index}>Start Time: {schedule.startTime}</Typography>
-                            <Typography component="h3" key={index}>End Time: {schedule.endTime}</Typography> 
-                            <Typography component="h3" color="textSecondary" key={index}>Type: {schedule.type}</Typography>
-                            <Typography component="h3" color="textSecondary" key={index}>Location: {schedule.location}</Typography>
-                            <Typography component="h3" color="textSecondary"key={index}>Description:{schedule.description}</Typography>
-                            <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                            >Edit</Button>
-                            <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                            >Delete</Button>
-                            </List>
-                            </Paper>
+                      <Paper style ={{maxHeight: 500, overflow: "auto"}}>
+                        <>
+                        <Card className="schedWrapper"
+                        variant="outlined"
+                        color="black">
+                          <CardActionArea>
+                            <CardContent>
+                              <Typography>
+                                {this.state.data.map((schedule, index) => {
+                                  return (
+                                    <>
+                                    <Paper>
+                                      <form>
+                                    <Card className="scheduleCreate"
+                                    variant="outlined"
+                                    color="black">
+                                      <CardActionArea>
+                                      <CardContent>
+                                    <Typography component="h1"key={index}>Day: {schedule.day}</Typography>
+                                    <Typography component="h4" key={index}>Date: {schedule.date}</Typography>
+                                    <Typography component="h4" key={index}>Start Time: {schedule.startTime}</Typography>
+                                    <Typography component="h4" key={index}>End Time: {schedule.endTime}</Typography>
+                                    <Typography component="h4" key={index}>Location {schedule.location}</Typography>
+                                    <Typography className="announcementText" color="textSecondary" key={index}>Description: {schedule.description}</Typography>
+                                    </CardContent>
+                                    </CardActionArea>
+                                    </Card>
+                                    </form>
+                                    <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    >Edit</Button>
+                                    <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick = {(e) => {this.deleteSchedule(e, schedule.id)}}
+                                    >Delete</Button>
+                                    </Paper>
+                                    
+                                    
+                                    <br/>
+                                    </>
+                                    
+                                  )
+                                })}
+                                
+                              </Typography>
                             </CardContent>
-                            </CardActionArea>
-                            </Card>
-                            <br/>
-                            </>
-                          )
-                        })}
-                        </List>
-                        </Paper>                     
+                          </CardActionArea>
+                        </Card>
+                        </>
+                      </Paper>
                     </form>
+                  </Paper>
                 </Container>
               </Fade>
             </Modal>
@@ -228,7 +271,7 @@ class ScheduleDisplay extends React.Component<
             >
               <Fade in={this.state.openModal}>
                 <Container>
-                  
+                  <Paper></Paper>
                 </Container>
               </Fade>
             </Modal>

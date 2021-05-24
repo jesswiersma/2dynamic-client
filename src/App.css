@@ -16,6 +16,13 @@
 
 /* HOME */
 
+.text {
+  font-size: 20pt;
+  text-align: center;
+  font-family: "Open Sans";
+  position: relative;
+  z-index: 2;
+}
 .splashBox {
   height: 780px;
   width: 96%;
@@ -24,6 +31,7 @@
 }
 
 #splashTitle {
+  font-family: "Open Sans";
   font-size: 30pt;
   color: black;
   text-align: center;
@@ -35,16 +43,44 @@
 }
 
 #splashImg {
+  border-radius: 50% 50% 50% 50%;
   display: inline;
   margin: 0 auto;
   height: auto;
   height: 650px;
-  width: 80%;
+  /* width: 80%; */
+  padding-left: 18%;
+  padding-right: 20%;
   position: relative;
   object-fit: cover;
   object-position: 50% 80%;
   position: center;
 }
+
+/* USER HOME */
+
+.userHome {
+  font-family: "Open Sans";
+  font-size: 20pt;
+  color: black;
+  text-align: center;
+  margin-top: 50pt;
+  margin-right: 100pt;
+  padding-bottom: 0px;
+  position: relative;
+  z-index: 2;
+  align-items: center;
+  
+ 
+}
+
+.display {
+  align-items: center;
+  text-align: center;
+  position: relative;
+ 
+}
+
 
 /* ADMIN HOME */
 
@@ -68,6 +104,10 @@
 
 .announceHome{
   text-align: center;
+}
+
+.announcementDisplay {
+  align-items: center;
 }
 
 /* FOOTER */

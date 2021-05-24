@@ -193,7 +193,7 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
                     required
                     style = {{width: "300x" , height: "150px"}}
                     type = "text"
-                    placeholder = "Announcement Description"
+                    placeholder = "Schedule description"
                     name = "description"
                     value = {this.state.description}
                     onChange = {(e) => this.handleChange(e)}

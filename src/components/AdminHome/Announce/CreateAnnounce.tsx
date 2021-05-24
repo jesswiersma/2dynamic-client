@@ -1,25 +1,6 @@
 import React, {BaseSyntheticEvent, Component} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import UserContext from "../../UserContext/userContext";
-
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-  
-});
 
 export interface AnnouncementCreateState {
     title: string;
@@ -33,8 +14,7 @@ export interface AnnouncementCreateProps {}
 
 class AnnouncementCreate extends Component <AnnouncementCreateProps, AnnouncementCreateState> {
     static contextType = UserContext;
-    //const className = useStyles();
-    //const bull = <span className={classes.bullet}>•</span>;
+
     constructor(props: AnnouncementCreateProps) {
         super(props);
         this.state = {
@@ -53,7 +33,7 @@ class AnnouncementCreate extends Component <AnnouncementCreateProps, Announcemen
             method: "POST",
             headers: new Headers ({
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${this.context.token}`
+                "Authorization": `Bearer ${this.context.token}`
             }),
             
             body: JSON.stringify({
