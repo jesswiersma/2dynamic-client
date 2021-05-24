@@ -53,6 +53,7 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
         )
         .then((res) => {
             if (res.status !== 201) {
+              console.log(res)
                 alert("Unable to register");
             } else {
                 //redirect to login?
