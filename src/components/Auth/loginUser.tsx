@@ -4,6 +4,7 @@ import UserContext from "../UserContext/userContext";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import APIURL from "../../helpers/environment";
 import {
   Modal,
   Container,
@@ -55,7 +56,7 @@ class LoginUser extends Component<LoginUserProps, LoginUserState> {
   loginUser(e: BaseSyntheticEvent) {
     console.log("handlesubmit");
     e.preventDefault();
-    fetch(`http://localhost:3000/user/login`, {
+    fetch(`${APIURL}/user/login`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",

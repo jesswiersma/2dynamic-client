@@ -3,6 +3,7 @@ import React, { Component, BaseSyntheticEvent} from "react";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import APIURL from "../../helpers/environment";
 
 export interface RegisterUserState {
     firstName: string;
@@ -34,7 +35,7 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
 
         e.preventDefault();
         console.log("line before fetch")
-        fetch(`http://localhost:3000/user/register`, {
+        fetch(`${APIURL}/user/register`, {
             method: "POST",
             headers: new Headers ({
                 "Content-Type": "application/json",
