@@ -69,7 +69,7 @@ class LoginUser extends Component<LoginUserProps, LoginUserState> {
       .then((res) => {
         console.log("hi");
         if (res.status !== 200) {
-          console.log("Invalid username or password");
+          console.log(res);
           alert("Invalid username or password");
         } else {
           console.log("test");
