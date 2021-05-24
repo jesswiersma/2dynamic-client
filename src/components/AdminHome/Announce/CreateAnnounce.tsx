@@ -1,6 +1,7 @@
 import React, {BaseSyntheticEvent, Component} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import UserContext from "../../UserContext/userContext";
+import APIURL from "../../../helpers/environment";
 
 export interface AnnouncementCreateState {
     title: string;
@@ -29,7 +30,7 @@ class AnnouncementCreate extends Component <AnnouncementCreateProps, Announcemen
     handleSubmit(e: BaseSyntheticEvent) {
         e.preventDefault();
         console.log("Fetch in announcement Create")
-        fetch(`http://localhost:3000/waterloo/announcement`, {
+        fetch(`${APIURL}/waterloo/announcement`, {
             method: "POST",
             headers: new Headers ({
                 "Content-Type": "application/json",

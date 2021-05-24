@@ -1,6 +1,7 @@
 import React, { BaseSyntheticEvent } from "react";
 import UserContext from "../../UserContext/userContext";
 import AnnouncementEdit from "./EditAnnounce";
+import APIURL from "../../../helpers/environment";
 
 import {
   Container,
@@ -62,7 +63,7 @@ class AnnouncementDisplay extends React.Component<
 
   handleOpenAnnouncement(e: React.BaseSyntheticEvent) {
     
-    fetch("http://localhost:3000/announcement/", {
+    fetch(`${APIURL}/announcement/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +94,7 @@ class AnnouncementDisplay extends React.Component<
     if (e) {e.preventDefault()};
     console.log("inside edit fetch")
 
-    fetch(`http://localhost:3000/waterloo/announcement/update/${id}`, {
+    fetch(`${APIURL}/waterloo/announcement/update/${id}`, {
       method: "PUT",
       headers: new Headers ({
         "Content-Type": "application/json",
@@ -123,7 +124,7 @@ class AnnouncementDisplay extends React.Component<
     if (e) {e.preventDefault()}
     console.log("inside delete fetch")
 
-    fetch(`http://localhost:3000/waterloo/announcement/delete/${id}`, {
+    fetch(`${APIURL}/waterloo/announcement/delete/${id}`, {
         method: "DELETE",
         headers: new Headers({
             "Content-Type": "application/json",

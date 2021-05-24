@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 //import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import {CircularProgress} from "@material-ui/core";
+import APIURL from "../../../helpers/environment";
 
 import UserContext from "../../UserContext/userContext";
 
@@ -75,7 +76,7 @@ class AnnouncementEdit extends Component <AnnouncementEditProps, AnnouncementEdi
      //if (e) {e.preventDefault()}
      console.log("inside get by id fetch")
 
-     fetch(`http://localhost:3000/announcement/${id}`, {
+     fetch(`${APIURL}/announcement/${id}`, {
        method: "GET",
        headers: {
          "Content-Type": "Application/json",
@@ -105,7 +106,7 @@ class AnnouncementEdit extends Component <AnnouncementEditProps, AnnouncementEdi
         if (e) {e.preventDefault()}
         console.log("inside edit fetch")
 
-        fetch(`http://localhost:3000/waterloo/announcement/update/${id}`, {
+        fetch(`${APIURL}/waterloo/announcement/update/${id}`, {
             method: "PUT",
             headers: new Headers ({
                 "Content-type": "Application/json",

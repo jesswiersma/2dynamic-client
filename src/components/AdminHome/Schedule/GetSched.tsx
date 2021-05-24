@@ -1,5 +1,6 @@
 import React from "react";
 import UserContext from "../../UserContext/userContext";
+import APIURL from "../../../helpers/environment";
 
 import {
   Container,
@@ -68,7 +69,7 @@ class ScheduleDisplay extends React.Component<
 
   handleOpenAnnouncement(e: React.BaseSyntheticEvent) {
 
-    fetch("http://localhost:3000/schedule/", {
+    fetch(`${APIURL}/schedule/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +99,7 @@ class ScheduleDisplay extends React.Component<
     if (e) {e.preventDefault()}
     console.log("inside delete fetch")
 
-    fetch(`http://localhost:3000/waterloo/schedule/delete/${id}`, {
+    fetch(`${APIURL}/waterloo/schedule/delete/${id}`, {
         method: "DELETE",
         headers: new Headers({
             "Content-Type": "application/json",

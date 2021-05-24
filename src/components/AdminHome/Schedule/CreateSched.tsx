@@ -2,6 +2,7 @@ import React, {BaseSyntheticEvent, Component} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import UserContext from "../../UserContext/userContext";
+import APIURL from "../../../helpers/environment";
 
 const useStyles = makeStyles({
   root: {
@@ -55,7 +56,7 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
     handleSubmit(e: BaseSyntheticEvent) {
         e.preventDefault();
         console.log("Fetch in schcedule Create")
-        fetch(`http://localhost:3000/waterloo/schedule`, {
+        fetch(`${APIURL}/waterloo/schedule`, {
             method: "POST",
             headers: new Headers ({
                 "Content-Type": "application/json",
