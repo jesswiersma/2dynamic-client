@@ -1,7 +1,6 @@
 import React from "react";
-import AnnouncementDisplay from '../AdminHome/Announce/GetAnnounce';
-import ScheduleDisplay from "../AdminHome/Schedule/GetSched";
-
+import UserAnnouncementDisplay from "./UserAnnounce";
+import UserScheduleDisplay from "./UserSchedule";
 
 const UserHome: React.FunctionComponent = () => {
     return (
@@ -9,9 +8,9 @@ const UserHome: React.FunctionComponent = () => {
         <h2>Welcome to your Home Page</h2>
         <p>Announcements</p>
         <div className="display">
-        <AnnouncementDisplay/>
+        <UserAnnouncementDisplay/>
         <p>Schedule</p>
-        <ScheduleDisplay/>
+        <UserScheduleDisplay/> 
         </div>
         </div>
     )
