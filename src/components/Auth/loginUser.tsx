@@ -4,6 +4,7 @@ import UserContext from "../UserContext/userContext";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { Card, CardContent, CardActionArea } from "@material-ui/core";
 // import APIURL from "../../helpers/environment";
 // import {
 //   Modal,
@@ -101,11 +102,16 @@ class LoginUser extends Component<LoginUserProps, LoginUserState> {
   render() {
     return (
       <div className = "login">
+        <>
+        <Card>
+          <CardContent>
+            <CardActionArea>
                 
       <form onSubmit={(e) => this.loginUser(e)}>
         <FormControl>
           <TextField
             required
+            size="small"
             label="email"
             type="text"
             name="email"
@@ -116,10 +122,12 @@ class LoginUser extends Component<LoginUserProps, LoginUserState> {
             onChange={(e) => this.handleChange(e)}
           />
         </FormControl>
+        <br/>
 
         <FormControl>
           <TextField
             required
+            size="small"
             label="password"
             type="text"
             name="password"
@@ -134,20 +142,27 @@ class LoginUser extends Component<LoginUserProps, LoginUserState> {
             onChange={(e) => this.handleChange(e)}
           />
         </FormControl>
+        <br/>
 
         <FormControl>
         <Button variant="outlined" color="primary" type="submit">
               Login 
             </Button> 
           
-            {this.context.isAuth ? <Redirect to="/waterloo" /> : <Redirect to = "/user" />}
+            {this.context.isAuth ? <Redirect to="/user" /> : null }
             
         </FormControl>
         </form>
         {/* <Button onClick={this.logout} variant="outlined" color="primary" type="submit">
               Logout
             </Button> */}
+            </CardActionArea>
+            </CardContent>
+            </Card>
+            </>
+
       </div>
+      
      
     );
   }

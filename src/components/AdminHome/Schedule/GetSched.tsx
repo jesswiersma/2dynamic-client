@@ -200,7 +200,7 @@ editSchedule = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
   render() {
     return (
       <div className = "scheduleDisplay">
-          <Grid className="SchedDisplay" item xs={12} sm={4} md={3} lg={2}>
+          <Grid className="schedDisplay" item xs={12} sm={4} md={3} lg={2}>
             <Paper elevation={20} variant="outlined" >
               <Card >
                 <CardActionArea>

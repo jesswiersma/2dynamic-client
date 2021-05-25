@@ -2,7 +2,7 @@ import React, { Component, BaseSyntheticEvent} from "react";
 //import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import {Button, Card, CardActionArea, CardContent} from "@material-ui/core";
 import {Redirect} from "react-router-dom";
 //import APIURL from "../../helpers/environment";
 
@@ -91,10 +91,14 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
             return (
               <div>
                 <>
+                <Card>
+                  <CardContent>
+                    <CardActionArea>
                 <form onSubmit={(e) => this.handleSubmit(e)}>
-                  <FormControl>
+                  <FormControl className="registerForm">
                     <TextField
                       required
+                      size="small"
                       label="First Name"
                       type="text"
                       name="firstName"
@@ -105,9 +109,11 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
                       onChange={(e) => this.handleChange(e)}
                     />
                   </FormControl>
-                  <FormControl>
+                  <br/>
+                  <FormControl className="registerForm">
                     <TextField
                       required
+                      size="small"
                       label="Last Name"
                       type="text"
                       name="lastName"
@@ -118,9 +124,11 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
                       onChange={(e) => this.handleChange(e)}
                     />
                   </FormControl>
-                  <FormControl>
+                  <br/>
+                  <FormControl className="registerForm">
                     <TextField
                       required
+                      size="small"
                       label="Email"
                       type="email"
                       name="email"
@@ -131,9 +139,11 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
                       onChange={(e) => this.handleChange(e)}
                     />
                   </FormControl>
-                  <FormControl>
+                  <br/>
+                  <FormControl className="registerForm">
                     <TextField
                       required
+                      size="small"
                       label="Password"
                       type="password"
                       name="password"
@@ -145,9 +155,11 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
                       onChange={(e) => this.handleChange(e)}
                     />
                   </FormControl>
-                  <FormControl>
+                  <br/>
+                  <FormControl className="registerForm">
                     <TextField
                       required
+                      size="small"
                       label="Organization"
                       type="text"
                       name="organization"
@@ -158,12 +170,16 @@ class RegisterUser extends Component <RegisterUserProps, RegisterUserState> {
                       onChange={(e) => this.handleChange(e)}
                     />
                   </FormControl>
-                  <FormControl>
+                  <br/>
+                  <FormControl className="registerForm">
                     <Button variant="outlined" color="primary" type="submit">
                       Register
                     </Button>
                   </FormControl>
                 </form>
+                </CardActionArea>
+                </CardContent>
+                </Card>
                 </>
                 {this.context.isAuth ? <Redirect to="/" /> : null}
               </div>

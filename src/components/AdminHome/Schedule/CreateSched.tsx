@@ -1,6 +1,5 @@
 import React, {BaseSyntheticEvent, Component} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {Form, FormGroup, Label, Input, Button, } from 'reactstrap';
 import UserContext from "../../UserContext/userContext";
 import { CardContent, Card, Paper } from '@material-ui/core';
 
@@ -96,11 +95,11 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
 
     render() {
          return(
-        <div>
-           
-            <Paper style={{maxWidth: 510}}>
-            <div className = "scheduleForm">Working Schedule Form to Create</div>
-            <Card style={{maxWidth: 500, background: "#F1F1F1"}}>
+        <div className="scheduleFormOuter">
+           <div className="scheduleFormInner">
+            <Paper style={{maxWidth: 525}}>
+            <div className="innerCard">Working Schedule Form to Create</div>
+            <Card className="card" style={{maxWidth: 500, background: "#F1F1F1"}}>
                 <CardContent>
                     
             <Form onSubmit = {(e) => this.handleSubmit(e)}>
@@ -143,7 +142,7 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
                 <FormGroup>
                     <Label htmlFor = "endTime"></Label>
                     <Input
-                    required
+                    // required
                     type = "text"
                     placeholder = "End Time"
                     name = "endTime"
@@ -178,15 +177,18 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
                 <br></br>
                 <FormGroup>
                     <Label htmlFor = "description"></Label>
+                    
                     <Input
                     required
+                    display="inline"
                     style = {{width: "400px" , height: "150px"}}
                     type = "text"
                     placeholder = "Schedule description"
                     name = "description"
                     value = {this.state.description}
                     onChange = {(e) => this.handleChange(e)}
-                    />
+                 
+                     /> 
                 </FormGroup>
                 <br></br>
                 <Button className = "SchedCreate" type = "submit">Submit Schedule</Button>
@@ -195,6 +197,7 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
             </CardContent>
             </Card>
             </Paper>
+            </div>
         </div>
     )
   }

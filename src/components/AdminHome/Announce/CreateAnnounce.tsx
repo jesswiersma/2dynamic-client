@@ -1,7 +1,7 @@
 import React, {BaseSyntheticEvent, Component} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import UserContext from "../../UserContext/userContext";
-import APIURL from "../../../helpers/environment";
+import {Paper, Card, CardContent} from "@material-ui/core";
 
 export interface AnnouncementCreateState {
     title: string;
@@ -81,11 +81,16 @@ class AnnouncementCreate extends Component <AnnouncementCreateProps, Announcemen
 
     render() {
          return(
-        <div>
-            <div className = "announcement">Working Announcement Form to Create</div>
+        <div className="announcementFormOuter">
+            <div className="announcementCard">
+            <Paper style={{maxWidth: 300}}>
+            <div className = "announcementForm">Working Announcement Form to Create</div>
+            <Card className="card" style={{maxWidth: 275, background: "#F1F1F1"}}>
+                <CardContent>
+
             <Form onSubmit = {(e) => this.handleSubmit(e)}>
                 <FormGroup>
-                    <Label htmlFor = "title"></Label>
+                    <Label htmlFor = "title">
                     <Input
                     type = "text"
                     placeholder = "Announcement Title"
@@ -93,6 +98,7 @@ class AnnouncementCreate extends Component <AnnouncementCreateProps, Announcemen
                     value = {this.state.title}
                     onChange = {(e) => this.handleChange(e)}
                     />
+                    </Label>
                 </FormGroup>
                 <br></br>
                 <FormGroup>
@@ -109,7 +115,7 @@ class AnnouncementCreate extends Component <AnnouncementCreateProps, Announcemen
                 <FormGroup>
                     <Label htmlFor = "description"></Label>
                     <Input
-                    style = {{width: "400px" , height: "150px"}}
+                    style = {{width: "200px" , height: "150px"}}
                     type = "text"
                     placeholder = "Announcement Description"
                     name = "description"
@@ -120,7 +126,12 @@ class AnnouncementCreate extends Component <AnnouncementCreateProps, Announcemen
                 <br></br>
                 <Button className = "CreateAnnounce" type = "submit">Submit Announcement</Button>
             </Form>
+            </CardContent>
+            </Card>
+            </Paper>
+            </div>
         </div>
+        
     )
   }
 }

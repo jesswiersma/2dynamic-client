@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import UserContext from './components/UserContext/userContext';
 
 ReactDOM.render(
   <React.StrictMode>
+    
     <App />
   </React.StrictMode>,
   document.getElementById('root')

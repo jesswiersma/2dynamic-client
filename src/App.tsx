@@ -28,18 +28,17 @@ class App extends React.Component<{}, {}> {
 
   render() {
     return (
+      <div className="App">
+        <UserContextProvider>
           <Router>
-          <div className="App">
-            <div className = "verticalCenter">
-              <UserContextProvider>
+            <div className = "verticalCenter"> 
               <Navbar />
-              <Switch>
-                
-                <Route exact path = "/user">
+              <Switch>               
+                <Route path = "/user">
                     <UserHome/>  
                 </Route>
-      
-                <Route exact path = "/waterloo">
+
+                <Route path = "/waterloo">
                    <AdminHome/> 
                 </Route>
       
@@ -57,16 +56,13 @@ class App extends React.Component<{}, {}> {
       
                 <Route path = "/">
                   <Home/>
-                </Route>
-                
+                </Route>  
               </Switch>
-              </UserContextProvider>
-                
               <Footer/>
-            
             </div>
-          </div>
           </Router>
+          </UserContextProvider>
+          </div>
         );
   }
 }
