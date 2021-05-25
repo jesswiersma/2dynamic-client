@@ -84,7 +84,8 @@ class AnnouncementCreate extends Component <AnnouncementCreateProps, Announcemen
         <div className="announcementFormOuter">
             <div className="announcementCard">
             <Paper style={{maxWidth: 300}}>
-            <div className = "announcementForm">Working Announcement Form to Create</div>
+                <div className="entireForm">
+            <div className = "announcementForm">Working Announcement Form to Create
             <Card className="card" style={{maxWidth: 275, background: "#F1F1F1"}}>
                 <CardContent>
 
@@ -128,6 +129,8 @@ class AnnouncementCreate extends Component <AnnouncementCreateProps, Announcemen
             </Form>
             </CardContent>
             </Card>
+            </div>
+            </div>
             </Paper>
             </div>
         </div>

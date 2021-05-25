@@ -250,12 +250,14 @@ class AnnouncementDisplay extends React.Component<
                                     </form>
                                     {/* <Button
                                     onClick = {(e) => {this.editAnnouncement(e, announcement.id)}}>Edit</Button> */}
-                                   
+                                   <br/>
                                     <AnnouncementEdit id={announcement.id}/> 
+                                    
                                     <Button
                                     type="submit"
                                     variant="contained"
                                     color="primary"
+    
                                     onClick = {(e) => {this.deleteAnnouncement(e, announcement.id)}}
                                     >Delete</Button>
                                     </Paper> 

@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
 
+
+
 /* Navbar */
 
 #logo {
@@ -30,10 +32,11 @@
   z-index: 2;
 }
 .splashBox {
-  height: 780px;
+  height: auto;
   width: 96%;
   margin: auto;
   position: relative;
+  size: 100%;
 }
 
 #splashTitle {
@@ -63,6 +66,15 @@
   position: center;
 }
 
+/* .splash, .container-fluid, .navbar-brand {
+  background: #e3e5ee;
+  size: auto;
+} */
+
+#Navbar {
+  background-color: #e3e5ee;
+}
+
 /* SCHEDULE */
 
 .scheduleFormOuter {
@@ -77,12 +89,27 @@
   size: medium;
 }
 
-/* ANNOUNCEMENT */
-
-.announcementFormOuter {
-  padding-left: 38%;
+.innerCard {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
 }
 
+/* ANNOUNCEMENT */
+
+.announcementForm {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
+}
+
+Button {
+  border: solid, 1px, #5964b8;
+}
+.announcementCard {
+  position: relative;
+  padding-left: 35%;
+}
 
 /* USER HOME */
 
@@ -120,7 +147,7 @@
 }
 
 
-.SchedDisplay {
+.scheduleDisplay {
   flex-grow: 1;
   overflow: auto;
   min-height: 100%;

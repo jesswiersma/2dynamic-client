@@ -202,7 +202,7 @@ editSchedule = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
       <div className = "scheduleDisplay">
           <Grid className="schedDisplay" item xs={12} sm={4} md={3} lg={2}>
             <Paper elevation={20} variant="outlined" >
-              <Card >
+              <Card>
                 <CardActionArea>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h4">
@@ -253,20 +253,17 @@ editSchedule = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
                                     <Typography component="h4" key={index}>Date: {schedule.date}</Typography>
                                     <Typography component="h4" key={index}>Start Time: {schedule.startTime}</Typography>
                                     <Typography component="h4" key={index}>End Time: {schedule.endTime}</Typography>
-                                    <Typography component="h4" key={index}>Type {schedule.type}</Typography>
-                                    <Typography component="h4" key={index}>Location {schedule.location}</Typography>
+                                    <Typography component="h4" key={index}>Type: {schedule.type}</Typography>
+                                    <Typography component="h4" key={index}>Location: {schedule.location}</Typography>
                                     <Typography className="announcementText" color="textSecondary" key={index}>Description: {schedule.description}</Typography>
                                     </CardContent>
                                     </CardActionArea>
                                     </Card>
                                     </form>
+                                    <br/>
 
                                     <ScheduleEdit id={schedule.id}/>
-                                    {/* <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    >Edit</Button> */}
+                                    
                                     <Button
                                     type="submit"
                                     variant="contained"

@@ -42,6 +42,7 @@ class NavBar extends React.Component<any, IMenuState> {
     alert("User successfully logged out!");
   };
 
+
   render() {
     return (
       <div className="container-fluid">
@@ -90,13 +91,14 @@ class NavBar extends React.Component<any, IMenuState> {
                 <MenuItem>
                    <Link to="/login"></Link>
                   <LoginUser setToken={this.props.setToken} />
-                 {/* <RegisterUser setToken = {this.props.setToken}/>  */}
                    </MenuItem>
 
                 <MenuItem>
                   <Link to="/register">Register</Link>
                   <RegisterUser setToken={this.props.setToken} />
                 </MenuItem>
+
+               {/* {isAuth ?  */}
 
                 <MenuItem>
                 <Link to="/user">User Home</Link>
@@ -109,6 +111,8 @@ class NavBar extends React.Component<any, IMenuState> {
                 <MenuItem>
                   <Link to="/">Home</Link>
                 </MenuItem>
+
+                {/* : path="/"} */}
               </Menu>
             </Paper>
           </Paper>

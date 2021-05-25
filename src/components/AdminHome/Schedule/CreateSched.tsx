@@ -98,7 +98,8 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
         <div className="scheduleFormOuter">
            <div className="scheduleFormInner">
             <Paper style={{maxWidth: 525}}>
-            <div className="innerCard">Working Schedule Form to Create</div>
+                
+            <div className="innerCard">Working Schedule Form to Create
             <Card className="card" style={{maxWidth: 500, background: "#F1F1F1"}}>
                 <CardContent>
                     
@@ -196,6 +197,7 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
             
             </CardContent>
             </Card>
+            </div>
             </Paper>
             </div>
         </div>

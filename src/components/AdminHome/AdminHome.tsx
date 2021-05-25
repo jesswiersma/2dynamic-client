@@ -12,11 +12,11 @@ const AdminHome: React.FunctionComponent = () => {
               <AnnouncementCreate/>  {/*Working POST - ugly form */}
               <br/>
               <AnnouncementDisplay/> {/* I would like to be able to view, edit and delete from this card */}
-            <p>Fill out the following from to create the Schedule
+            <p>Fill out the following from to create the Schedule</p>
              <ScheduleCreate/>
              <br/>
              <ScheduleDisplay/>
-             </p>
+             
               
         </div>
     )

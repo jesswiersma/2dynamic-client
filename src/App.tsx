@@ -23,43 +23,35 @@ class App extends React.Component<{}, {}> {
     super(props);
     this.state = {
       isAuth: "",
+      token: "",
     };
   }
 
+ 
   render() {
     return (
       <div className="App">
         <UserContextProvider>
           <Router>
+          <>
             <div className = "verticalCenter"> 
               <Navbar />
+             
               <Switch>               
-                <Route path = "/user">
-                    <UserHome/>  
-                </Route>
+                
+                <Route path = "/waterloo" component={AdminHome}/>
+                <Route path = "/register" component={RegisterUser}/>
+                <Route path = "/login" component={LoginUser}/>
+                <Route path = "/user" component={UserHome}/>
+                <Route path = "/" component={Home}/>
 
-                <Route path = "/waterloo">
-                   <AdminHome/> 
-                </Route>
-      
-                <Route path = "/user/register">
-                </Route>
-      
-                <Route path = "/schedule">
-                  <HomeSched/> 
-                </Route>
-      
-                <Route path = "/announcement">
-                  <HomeAnnounce/>
-                </Route>
-      
-      
-                <Route path = "/">
-                  <Home/>
-                </Route>  
               </Switch>
+              
               <Footer/>
+             
             </div>
+            </>
+           
           </Router>
           </UserContextProvider>
           </div>
@@ -69,6 +61,9 @@ class App extends React.Component<{}, {}> {
 
 export default App;
 
+
+{/* <Route path = "/schedule" component={HomeSched}/>
+<Route path = "/announcement" component={HomeAnnounce}/> */}
 
 // const App: React.FunctionComponent = () => {
 //   
