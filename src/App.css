@@ -130,7 +130,13 @@ Button {
   align-items: center;
   text-align: center;
   position: relative;
- 
+  
+}
+
+#citySheet {
+  width: 500px;
+  height: 500px;
+  /* float: left; */
 }
 
 
