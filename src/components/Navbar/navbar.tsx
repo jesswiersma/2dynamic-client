@@ -98,8 +98,8 @@ class NavBar extends React.Component<any, IMenuState> {
                   <RegisterUser setToken={this.props.setToken} />
                 </MenuItem>
 
-               {/* {isAuth ?  */}
-
+               {this.context.isAuth ?  
+                  <>
                 <MenuItem>
                 <Link to="/user">User Home</Link>
                 </MenuItem>
@@ -107,12 +107,14 @@ class NavBar extends React.Component<any, IMenuState> {
                 <MenuItem>
                   <Link to="/waterloo">Admin Home</Link>
                 </MenuItem>
+                  </>
+                :<> </>} 
 
                 <MenuItem>
                   <Link to="/">Home</Link>
                 </MenuItem>
 
-                {/* : path="/"} */}
+                
               </Menu>
             </Paper>
           </Paper>
