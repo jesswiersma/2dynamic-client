@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import {Form, FormGroup, Label} from 'reactstrap';
-
+import {FormGroup} from 'reactstrap';
 import UserContext from "../../UserContext/userContext";
 
 import {
@@ -26,6 +25,7 @@ interface Announcement {
   response: boolean;
   id: number;
 }
+
 export interface AnnouncementEditState {
   data: Announcement;
   title: string;
@@ -117,6 +117,8 @@ class AnnouncementEdit extends Component<
       });
   }
 
+  ///////////////// EDIT ///////////////////
+
   editAnnouncement(e: React.BaseSyntheticEvent, id: number) {
     if (e) {
       e.preventDefault();
@@ -157,6 +159,8 @@ class AnnouncementEdit extends Component<
         });
       });
   }
+
+  ///////////////////////////////////
 
   stateSetter = (data: Announcement) => {
     return this.setState({ isSet: true });

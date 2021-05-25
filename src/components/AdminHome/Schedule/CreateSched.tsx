@@ -2,25 +2,8 @@ import React, {BaseSyntheticEvent, Component} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import UserContext from "../../UserContext/userContext";
-import APIURL from "../../../helpers/environment";
+import { CardContent, Card, Paper } from '@material-ui/core';
 
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-  
-});
 
 export interface ScheduleCreateState {
     day: string;
@@ -114,7 +97,12 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
     render() {
          return(
         <div>
+           
+            <Paper style={{maxWidth: 510}}>
             <div className = "scheduleForm">Working Schedule Form to Create</div>
+            <Card style={{maxWidth: 500, background: "#F1F1F1"}}>
+                <CardContent>
+                    
             <Form onSubmit = {(e) => this.handleSubmit(e)}>
                 <FormGroup>
                     <Label htmlFor = "day"></Label>
@@ -203,6 +191,10 @@ class ScheduleCreate extends Component <ScheduleCreateProps, ScheduleCreateState
                 <br></br>
                 <Button className = "SchedCreate" type = "submit">Submit Schedule</Button>
             </Form>
+            
+            </CardContent>
+            </Card>
+            </Paper>
         </div>
     )
   }

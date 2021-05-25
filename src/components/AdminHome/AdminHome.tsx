@@ -13,6 +13,7 @@ const AdminHome: React.FunctionComponent = () => {
               <AnnouncementDisplay/> {/* I would like to be able to view, edit and delete from this card */}
             <p>Fill out the following from to create the Schedule
              <ScheduleCreate/>
+             <br/>
              <ScheduleDisplay/>
              </p>
               

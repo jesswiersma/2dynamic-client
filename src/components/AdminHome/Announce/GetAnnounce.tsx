@@ -1,7 +1,6 @@
 import React, { BaseSyntheticEvent } from "react";
 import UserContext from "../../UserContext/userContext";
-import AnnouncementEdit from "./EditAnnounce";
-import APIURL from "../../../helpers/environment";
+import AnnouncementEdit from "./EditAnnounce"
 
 import {
   Container,
@@ -62,7 +61,7 @@ class AnnouncementDisplay extends React.Component<
 /////////// GET ALL ////////////////
 
   handleOpenAnnouncement(e: React.BaseSyntheticEvent) {
-      
+
     fetch(`${process.env.REACT_APP_SERVER}/announcement/`, {
       method: "GET",
       headers: {
@@ -88,7 +87,7 @@ class AnnouncementDisplay extends React.Component<
       });
   }
 
-///////////// EDIT - get a 200 response but how do I put in a modal to actually edit??/////////////////////
+///////////// EDIT - WORKING /////////////////////
 
   editAnnouncement = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
     if (e) {e.preventDefault()};
@@ -145,6 +144,8 @@ class AnnouncementDisplay extends React.Component<
     });
     };
 
+    ///////////////////////////////////////////////////
+
   stateSetter = () => {
     return this.setState({ isSet: true });
   };
@@ -193,7 +194,6 @@ class AnnouncementDisplay extends React.Component<
   render() {
     return (
       <div className = "announcementDisplay">
-        {/* {this.state.isSet ? ( */}
           <Grid item xs={12} sm={4} md={3} lg={2}>
             <Paper elevation={20} variant="outlined">
               <Card >

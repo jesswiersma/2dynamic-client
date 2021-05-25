@@ -1,6 +1,6 @@
 import React from "react";
 import UserContext from "../../UserContext/userContext";
-import APIURL from "../../../helpers/environment";
+import ScheduleEdit from "./EditSchedule";
 
 import {
   Container,
@@ -59,6 +59,7 @@ class ScheduleDisplay extends React.Component<
         isSet: false,
     };
   }
+
   handleOpenModal(e: React.BaseSyntheticEvent) {
     this.setState({
       openModal: true,
@@ -94,6 +95,37 @@ class ScheduleDisplay extends React.Component<
       });
   }
 
+/////////////// EDIT ///////////////////
+
+editSchedule = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+  if (e) {e.preventDefault()};
+  console.log("inside edit schedule fetch")
+
+  fetch(`${process.env.REACT_APP_SERVER}/waterloo/schedule/update/${id}`,{
+    method: "PUT",
+    headers: new Headers ({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${this.context.token}`,
+    }),
+
+    body: JSON.stringify({
+      data: this.state.data,
+    })
+  },
+  )
+  .then((res) => {
+    if(res.status !== 200) {
+      console.log(res)
+      alert("Unable to edit schedule");
+    } else {
+      alert ("Schedule successfully edited!");
+    }
+    return res.json()
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
+  })
+}
+  
   ///////////// DELETE //////////////
   deleteSchedule = (e:React.MouseEvent<HTMLButtonElement>, id: number) => {
     if (e) {e.preventDefault()}
@@ -158,12 +190,11 @@ class ScheduleDisplay extends React.Component<
     }));
   }
   
-  // componentDidUpdate(){
-  //   setTimeout(()=>{
-  //     console.log(this.state.data[0].date)}, 3000,
-  //     )
-  //     console.log(this.state.data)
-  // }
+  componentDidUpdate(){
+    setTimeout(()=>{
+      console.log(this.state.data)}, 1000,
+      )
+  }
 
 
   render() {
@@ -222,17 +253,20 @@ class ScheduleDisplay extends React.Component<
                                     <Typography component="h4" key={index}>Date: {schedule.date}</Typography>
                                     <Typography component="h4" key={index}>Start Time: {schedule.startTime}</Typography>
                                     <Typography component="h4" key={index}>End Time: {schedule.endTime}</Typography>
+                                    <Typography component="h4" key={index}>Type {schedule.type}</Typography>
                                     <Typography component="h4" key={index}>Location {schedule.location}</Typography>
                                     <Typography className="announcementText" color="textSecondary" key={index}>Description: {schedule.description}</Typography>
                                     </CardContent>
                                     </CardActionArea>
                                     </Card>
                                     </form>
-                                    <Button
+
+                                    <ScheduleEdit id={schedule.id}/>
+                                    {/* <Button
                                     type="submit"
                                     variant="contained"
                                     color="primary"
-                                    >Edit</Button>
+                                    >Edit</Button> */}
                                     <Button
                                     type="submit"
                                     variant="contained"
@@ -240,8 +274,6 @@ class ScheduleDisplay extends React.Component<
                                     onClick = {(e) => {this.deleteSchedule(e, schedule.id)}}
                                     >Delete</Button>
                                     </Paper>
-                                    
-                                    
                                     <br/>
                                     </>
                                     
