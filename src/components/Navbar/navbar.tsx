@@ -22,6 +22,7 @@ class NavBar extends React.Component<any, IMenuState> {
     this.state = {
       anchorEl: null,
       //token: "",
+      //isAdmin: true;
     };
   }
 
@@ -98,17 +99,26 @@ class NavBar extends React.Component<any, IMenuState> {
                   <RegisterUser setToken={this.props.setToken} />
                 </MenuItem>
 
+                {/* ternary to hide /user route until signed in */}
+
                {this.context.isAuth ?  
                   <>
                 <MenuItem>
                 <Link to="/user">User Home</Link>
                 </MenuItem>
+                {/* </>
+                :<> </>}  */}
 
+                {/* {this.context.isAuth && isAdmin === true
+                <> */}
                 <MenuItem>
                   <Link to="/waterloo">Admin Home</Link>
                 </MenuItem>
-                  </>
-                :<> </>} 
+                {/* </>
+                : <> </>} */}
+
+                   </>
+                :<> </>}  
 
                 <MenuItem>
                   <Link to="/">Home</Link>
@@ -125,10 +135,4 @@ class NavBar extends React.Component<any, IMenuState> {
 }
 export default NavBar;
 
- {/* <MenuItem>
-                  <Link to="/announcement">Announcement</Link>
-                </MenuItem>
-
-                <MenuItem>
-                  <Link to="/schedule">Schedule</Link>
-                </MenuItem> */}
+ 
